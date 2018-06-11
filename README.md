@@ -10,5 +10,5 @@ Download composer and install it on your system.
 $ git clone https://github.com/KezeirP/FinalWorkFinal.git
 ```
 
-4. Run the project on your localhost.
+3. Run the project on your localhost.
 * ```$ php artisan serve```
