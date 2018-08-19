@@ -6,6 +6,7 @@ use App\AddCode;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AddCodeController extends Controller
 {
@@ -16,7 +17,16 @@ class AddCodeController extends Controller
      */
     public function index()
     {
-        $codes=AddCode::all();
+
+        $codes = DB::table('users')
+            ->distinct()
+            ->join('add_codes', 'add_codes.user', '=', 'users.id')
+            ->join('GPS', 'add_codes.code', '=', 'GPS.Device')
+            ->where('add_codes.user', '=',  Auth::user()->getAuthIdentifier())
+            ->select('add_codes.*')
+            ->get();
+
+        //$codes=AddCode::all();
         return view('viewCodes', compact('codes'));
     }
 

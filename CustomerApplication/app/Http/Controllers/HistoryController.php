@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\GpsData;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HistoryController extends Controller
 {
@@ -12,10 +14,23 @@ class HistoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        $history=GpsData::all();
+        $history = DB::table('users')
+            ->join('add_codes', 'add_codes.user', '=', 'users.id')
+            ->join('GPS', 'add_codes.code', '=', 'GPS.Device')
+            ->where('add_codes.user', '=', Auth::user()->getAuthIdentifier())
+            ->select('users.*', 'GPS.*', 'add_codes.*')
+            ->get();
+
         return view('history',compact('history'));
+
     }
 
     /**
@@ -47,7 +62,15 @@ class HistoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $codes = DB::table('users')
+            ->join('add_codes', 'add_codes.user', '=', 'users.id')
+            ->join('GPS', 'add_codes.code', '=', 'GPS.Device')
+            ->where('add_codes.user', '=',  Auth::user()->getAuthIdentifier())
+            ->where('GPS.Device', "=", $id)
+            ->select('add_codes.*, GPS.*')
+            ->get();
+
+        return view('history', compact('code', 'id'));
     }
 
     /**

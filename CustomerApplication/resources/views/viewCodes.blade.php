@@ -19,14 +19,13 @@
                             @foreach($codes as $code)
 
                                 <tr>
-                                    <td>{{$code['code']}}</td>
-                                    <td></td>
-                                    <td style="display: flex; text-align: right; ">
-                                        <div style="text-align: right; flex: 1; margin-right: 10px;">
-                                            <a href="{{action('AddCodeController@edit', $code['id'])}}" class="btn btn-warning">Edit</a>
+                                    <td style="width: 150%">{{$code->code}}</td>
+                                    <td style="display: flex; ">
+                                        <div style="text-align: right;  margin-right: 10px;">
+                                            <a href="{{action('AddCodeController@edit', $code->id)}}" class="btn btn-warning">Edit</a>
                                         </div>
                                         <div>
-                                            <form action="{{action('AddCodeController@destroy', $code['id'])}}" method="post">
+                                            <form action="{{action('AddCodeController@destroy', $code->id)}}" method="post">
                                                 @csrf
                                                 <input name="_method" type="hidden" value="DELETE">
                                                 <button class="btn btn-danger" type="submit">Delete</button>

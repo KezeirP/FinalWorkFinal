@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAddCodesTable extends Migration
+class CreateDataTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,14 @@ class CreateAddCodesTable extends Migration
      */
     public function up()
     {
-        Schema::create('devices', function (Blueprint $table) {
+        Schema::create('data', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('code');
-            $table->integer('user');
+            $table->double('longitude');
+            $table->double('latitude');
+            $table->integer('device');
+            $table->double('Temperature');
+            $table->double('speed');
+            $table->time('Time');
             $table->timestamps();
         });
     }
@@ -28,6 +32,6 @@ class CreateAddCodesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('devices');
+        Schema::dropIfExists('data');
     }
 }

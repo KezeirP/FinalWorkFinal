@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $codes = DB::table('GPS')
+            ->join('add_codes', 'add_codes.code', '=', 'GPS.Device')
+            ->selectRaw('GPS.*')
+            ->where('add_codes.user', '=', Auth::user()->getAuthIdentifier())
+            ->whereRaw('GPS.Time IN (SELECT MAX(GPS.Time) FROM `GPS` GROUP BY GPS.Device)')
+            ->get();
+
+        return view('home', compact('codes'));
     }
+
 }
