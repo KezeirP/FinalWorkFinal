@@ -21,38 +21,32 @@
 
                     <div class="card-body">
 
-                           <table class="table table-striped table-dark">
-                               <thead>
-                               <tr>
-                                   <th scope="col">id</th>
-                                   <th scope="col">longitude</th>
-                                   <th scope="col">latitude</th>
-                                   <th scope="col">Device</th>
-                                   <th scope="col">Temperature</th>
-                                   <th scope="col">speed</th>
-                                   <th scope="col">Time</th>
-                                   <th scope="col">name</th>
-                                   <th scope="col">email</th>
-                               </tr>
-                               </thead>
-                               <tbody>
+                        <table class="table table-striped table-dark">
+                            <thead>
+                            <tr>
+                                <th scope="col">longitude</th>
+                                <th scope="col">latitude</th>
+                                <th scope="col">Device</th>
+                                <th scope="col">Temperature</th>
+                                <th scope="col">speed</th>
+                                <th scope="col">Time</th>
+                            </tr>
+                            </thead>
+                            <tbody>
 
-                               @foreach($history as $h)
-                                   <tr>
-                                       <th scope="row">{{$h->id}}</th>
-                                       <td>{{$h->longitude}}</td>
-                                       <td>{{$h->latitude}}</td>
-                                       <td>{{$h->Device}}</td>
-                                       <td>{{$h->Temperature}}</td>
-                                       <td>{{$h->speed}}</td>
-                                       <td>{{$h->Time}}</td>
-                                       <td>{{$h->name}}</td>
-                                       <td>{{$h->email}}</td>
-                                   </tr>
-                               @endforeach
+                            @foreach($history as $h)
+                                <tr>
+                                    <td>{{$h->longitude}}</td>
+                                    <td>{{$h->latitude}}</td>
+                                    <td>{{$h->Device}}</td>
+                                    <td>{{$h->Temperature}}</td>
+                                    <td>{{$h->speed}}</td>
+                                    <td>{{$h->Time}}</td>
+                                </tr>
+                            @endforeach
 
-                               </tbody>
-                           </table>
+                            </tbody>
+                        </table>
 
                     </div>
                 </div>
