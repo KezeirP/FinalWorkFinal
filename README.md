@@ -14,12 +14,12 @@ This is a map application that I built using AngularJS, Leaflet.js and Laravel F
     ```bash
     $ composer install
     ```
+4) Create .env file in root of project and copy env.example into it
 
-4) Run the project on your localhost.
+5) Run the project on your localhost.
 
     $ php artisan serve
 
-## View the project on the server
 
 
 ## User guide
